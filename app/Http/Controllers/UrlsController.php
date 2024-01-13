@@ -51,7 +51,7 @@ class UrlsController extends Controller
         $url = $this->getUrlByShortUrl($short_url);
         if (!$url) {
             return redirect()->route('home')->with('error', 'Link não encontrado');
-        } elseif ($url->expires_at && today() > $url->expires_at) {
+        } elseif ($url->expires_at && $url->expires_at < today()->format('Y-m-d')) {
             $this->destroy($url);
             return redirect()->route('home')->with('error', 'Link expirado');
         }
