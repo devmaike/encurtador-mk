@@ -78,3 +78,18 @@ button {
     align-items: center;
     justify-content: center;
 }
+
+.alert {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}

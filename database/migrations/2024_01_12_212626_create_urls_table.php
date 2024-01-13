@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText("short_url");
             $table->string("user_ip");
             $table->integer("visits")->default(0);
-            $table->timestamp("expires_at")->nullable();
+            $table->date("expires_at")->nullable();
             $table->timestamps();
         });
     }

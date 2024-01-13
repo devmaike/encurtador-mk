@@ -50,12 +50,11 @@ class UrlsController extends Controller
     public function getUrl($short_url)
     {
         $url = $this->getUrlByShortUrl($short_url);
-
         if (!$url) {
-            return response()->json(['message' => 'Link não encontrado'], 404);
-        } elseif ($url->expires_at && $url->expires_at < now()) {
+            return redirect()->route('home')->with('error', 'Link não encontrado');
+        } elseif ($url->expires_at && today() > $url->expires_at) {
             $this->destroy($url);
-            return response()->json(['message' => 'Link não encontrado'], 404);
+            return redirect()->route('home')->with('error', 'Link expirado');
         }
 
         $this->updateVisits($url);
@@ -113,6 +112,7 @@ class UrlsController extends Controller
      */
     public function destroy(Urls $url): \Illuminate\Http\JsonResponse
     {
+        $url->visits()->delete();
         $url->delete();
 
         return response()->json(['message' => 'Link deletado com sucesso'], 200);

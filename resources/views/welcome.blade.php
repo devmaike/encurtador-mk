@@ -12,7 +12,13 @@
 </head>
 
 <body>
+
     <div class="container">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <div>
             <h1>Encurtador-MK</h1>
             <p>
