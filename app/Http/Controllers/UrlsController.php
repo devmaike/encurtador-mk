@@ -19,7 +19,6 @@ class UrlsController extends Controller
         $url = $this->createUrl($original_url, $short_custom, $expiration_date, $request->ip());
 
         return response()->json([
-            'original_url' => $url->original_url,
             'short_url' => config('app.url') . '/' . $url->short_url,
             'expires_at' => $url->expiration_date ? $url->expiration_date : null,
         ], 201);
@@ -58,14 +57,14 @@ class UrlsController extends Controller
         }
 
         $this->updateVisits($url);
-        
+
         return redirect(base64_decode($url->original_url));
     }
 
     /**
      * Create a new URL.
      */
-    private function createUrl($original_url, $short_custom=null, $expiration_date=null, $user_ip): Urls
+    private function createUrl($original_url, $short_custom = null, $expiration_date = null, $user_ip): Urls
     {
         return Urls::create([
             'original_url' => base64_encode($original_url),
