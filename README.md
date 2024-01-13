@@ -1,6 +1,6 @@
 # Encurtador MK (Encurta URL)
 
-Esta ferramenta permite criar aliases curtos e fáceis de compartilhar para URLs longas. Além disso, ela oferece uma API para acesso programático.
+Esta ferramenta permite criar aliases curtos e fáceis de compartilhar para URLs longas. Além disso, ela oferece uma API para acesso.
 
 ## Recursos
 Interface Intuitiva: Interface web amigável para criar e gerenciar URLs encurtadas.
