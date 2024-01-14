@@ -22,7 +22,7 @@ class RequestGuardian
         $thirtyRequests = Urls::where('user_ip', $userIp)
             ->where('created_at', '>=', $tenMinutesAgo)
             ->count();
-        if ($thirtyRequests >= 30) {
+        if ($thirtyRequests >= 20) {
             return response()->json([
                 'error' => 'Muitas requisições',
             ], 429);
