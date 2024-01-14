@@ -93,3 +93,11 @@ button {
     border-color: #f5c6cb;
     color: #721c24;
 }
+
+#qr-code {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

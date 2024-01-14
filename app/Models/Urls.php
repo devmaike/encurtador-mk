@@ -29,7 +29,6 @@ class Urls extends Model
         'short_url',
         'visits',
         'user_ip',
-        'user_agent',
         'expires_at',
     ];
 

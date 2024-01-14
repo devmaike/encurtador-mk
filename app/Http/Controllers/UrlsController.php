@@ -17,10 +17,11 @@ class UrlsController extends Controller
         $expiration_date = $request->input('data_expiracao');
         $short_custom = $request->input('apelido');
         $url = $this->createUrl($original_url, $short_custom, $expiration_date, $request->ip());
-
+        
         return response()->json([
             'short_url' => config('app.url') . '/' . $url->short_url,
             'expires_at' => $url->expiration_date ? $url->expiration_date : null,
+            'qr_code' => $url->qr_code,
         ], 201);
     }
 
