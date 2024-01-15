@@ -21,7 +21,6 @@ class UrlsController extends Controller
         return response()->json([
             'short_url' => config('app.url') . '/' . $url->short_url,
             'expires_at' => $url->expiration_date ? $url->expiration_date : null,
-            'qr_code' => $url->qr_code,
         ], 201);
     }
 
