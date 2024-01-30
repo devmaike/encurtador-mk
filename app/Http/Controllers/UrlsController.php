@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUrlRequest;
 use App\Models\Urls;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class UrlsController extends Controller
@@ -70,7 +71,7 @@ class UrlsController extends Controller
             'original_url' => base64_encode($original_url),
             'short_url' => $short_custom ? $short_custom : $this->generateShortUrl(),
             'user_ip' => $user_ip,
-            'expires_at' => $expiration_date,
+            'expires_at' => Carbon::parse($expiration_date)->format('Y-m-d'),
         ]);
     }
 
