@@ -18,7 +18,7 @@ class UrlsController extends Controller
         $expiration_date = $request->input('data_expiracao');
         $short_custom = $request->input('apelido');
         $url = $this->createUrl($original_url, $short_custom, $expiration_date, $request->ip());
-        
+
         return response()->json([
             'short_url' => config('app.url') . '/' . $url->short_url,
             'expires_at' => $url->expiration_date ? $url->expiration_date : null,
@@ -52,7 +52,10 @@ class UrlsController extends Controller
         $url = $this->getUrlByShortUrl($short_url);
         if (!$url) {
             return redirect()->route('home')->with('error', 'Link não encontrado');
-        } elseif ($url->expires_at && $url->expires_at < today()->format('Y-m-d')) {
+        } elseif (
+            Carbon::parse($url->expires_at)
+            && Carbon::parse($url->expires_at) < today()->format('Y-m-d')
+        ) {
             $this->destroy($url);
             return redirect()->route('home')->with('error', 'Link expirado');
         }
@@ -126,7 +129,7 @@ class UrlsController extends Controller
         $url = Urls::where('short_url', $code)->firstOrFail();
         return response()->json([
             'url_encurtada' => config('app.url') . '/' . $url->short_url,
-            'expira_em' => $url->expiration_date ? $url->expiration_date : null,
+            'expira_em' => $url->expires_at ? $url->expires_at : null,
             'visitas' => $url->visits,
         ], 200);
     }
