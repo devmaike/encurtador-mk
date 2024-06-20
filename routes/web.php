@@ -19,3 +19,4 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/{short_url}', [UrlsController::class, 'getUrl'])->name('urls.get');
+Route::get('/{code}/status', [UrlsController::class, 'getUrlStatus'])->name('urls.status');

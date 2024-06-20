@@ -66,6 +66,27 @@ class UrlsController extends Controller
     }
 
     /**
+     * Get URL Status
+     */
+    public function getUrlStatus($short_url)
+    {
+        $url = $this->getUrlByShortUrl($short_url);
+        if (!$url) {
+            return redirect()->route('home')->with('error', 'Link não encontrado');
+        } elseif (
+            Carbon::parse($url->expires_at)
+            && Carbon::parse($url->expires_at) < today()->format('Y-m-d')
+        ) {
+            $this->destroy($url);
+            return redirect()->route('home')->with('error', 'Link expirado');
+        }
+
+        return view('status', [
+            'url' => $url,
+        ]);
+    }
+
+    /**
      * Create a new URL.
      */
     private function createUrl($original_url, $short_custom = null, $expiration_date = null, $user_ip): Urls
