@@ -95,7 +95,7 @@ class UrlsController extends Controller
             'original_url' => base64_encode($original_url),
             'short_url' => $short_custom ? $short_custom : $this->generateShortUrl(),
             'user_ip' => $user_ip,
-            'expires_at' => Carbon::parse($expiration_date)->format('Y-m-d'),
+            'expires_at' => $expiration_date ? Carbon::parse($expiration_date)->format('d/m/Y') : null,
         ]);
     }
 
